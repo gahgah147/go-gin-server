@@ -1,0 +1,5 @@
+host: db
+username: root
+password: root
+dbname: go
+port: 3306
