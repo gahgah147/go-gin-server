@@ -22,7 +22,7 @@ func main() {
 	//註冊路由
 	r := router.SetRouter()
 
-	//啟動埠為8081的專案
+	//啟動埠為8082的專案
 	fmt.Println("開啟:8082...")
 	r.Run(":8082")
 }

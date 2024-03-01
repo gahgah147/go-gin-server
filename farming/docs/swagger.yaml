@@ -1,0 +1,188 @@
+info:
+  contact: {}
+paths:
+  /api/file:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            type: string
+        "400":
+          description: 查询错误
+          schema:
+            type: string
+      summary: 查詢全部照片跟影片
+    post:
+      parameters:
+      - description: 傳送人
+        in: formData
+        name: Sender
+        required: true
+        type: string
+      - description: 上傳檔案
+        in: formData
+        name: Image
+        required: true
+        type: file
+      - description: 機器編號
+        in: formData
+        name: Machine_Id
+        required: true
+        type: string
+      - description: 位置
+        in: formData
+        name: Location
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: 成功
+          schema:
+            type: string
+        "400":
+          description: 上傳檔案錯誤
+          schema:
+            type: string
+      summary: 上傳照片/影片
+  /api/file/{id}:
+    put:
+      parameters:
+      - description: 上傳檔案ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 傳送人
+        in: formData
+        name: Sender
+        required: true
+        type: string
+      - description: 上傳檔案
+        in: formData
+        name: Image
+        required: true
+        type: file
+      - description: 機器編號
+        in: formData
+        name: Machine_Id
+        required: true
+        type: string
+      - description: 位置
+        in: formData
+        name: Location
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            type: string
+        "400":
+          description: 修改上傳檔案錯誤
+          schema:
+            type: string
+      summary: 修改 {id} 上傳檔案
+  /api/message:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            type: string
+        "400":
+          description: 查询错误
+          schema:
+            type: string
+      summary: 查询全部留言
+    post:
+      parameters:
+      - description: 留言內容
+        in: formData
+        name: Content
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: 成功
+          schema:
+            type: string
+        "400":
+          description: 新增留言錯誤
+          schema:
+            type: string
+      summary: 新增留言
+  /api/message/{id}:
+    delete:
+      parameters:
+      - description: 留言ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: 成功
+          schema:
+            type: string
+        "404":
+          description: 找不到留言
+          schema:
+            type: string
+      summary: 刪除留言
+    get:
+      parameters:
+      - description: 留言ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            type: string
+        "404":
+          description: 找不到留言
+          schema:
+            type: string
+      summary: 查询 {id} 留言
+    put:
+      parameters:
+      - description: 留言ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 留言內容
+        in: formData
+        name: Content
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            type: string
+        "400":
+          description: 更新留言錯誤
+          schema:
+            type: string
+      summary: 更新留言
+swagger: "2.0"

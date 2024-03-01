@@ -9,6 +9,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// GetAll
+// @Summary 查询全部留言
+// @Produce json
+// @Success 200 {object} string "成功"
+// @Failure 400 {object} string "查询错误"
+// @Router /api/message [get]
 func GetAll(c *gin.Context) {
 	message, err := repository.GetAllMessage()
 
@@ -19,6 +25,12 @@ func GetAll(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": message})
 }
 
+// @Summary 查询 {id} 留言
+// @Produce json
+// @Param id path int true "留言ID"
+// @Success 200 {object} string "成功"
+// @Failure 404 {object} string "找不到留言"
+// @Router /api/message/{id} [get]
 func Get(c *gin.Context) {
 	var message model.Message
 
@@ -29,6 +41,12 @@ func Get(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": message})
 }
 
+// @Summary 新增留言
+// @Produce json
+// @Param Content formData string true "留言內容"
+// @Success 201 {object} string "成功"
+// @Failure 400 {object} string "新增留言錯誤"
+// @Router /api/message [post]
 func Create(c *gin.Context) {
 	var message model.Message
 
@@ -42,6 +60,13 @@ func Create(c *gin.Context) {
 	c.JSON(http.StatusCreated, gin.H{"message": message})
 }
 
+// @Summary 更新留言
+// @Produce json
+// @Param id path int true "留言ID"
+// @Param Content formData string true "留言內容"
+// @Success 200 {object} string "成功"
+// @Failure 400 {object} string "更新留言錯誤"
+// @Router /api/message/{id} [put]
 func Update(c *gin.Context) {
 	var message model.Message
 
@@ -57,6 +82,12 @@ func Update(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": message})
 }
 
+// @Summary 刪除留言
+// @Produce json
+// @Param id path int true "留言ID"
+// @Success 204 {object} string "成功"
+// @Failure 404 {object} string "找不到留言"
+// @Router /api/message/{id} [delete]
 func Delete(c *gin.Context) {
 	var message model.Message
 
@@ -67,6 +98,15 @@ func Delete(c *gin.Context) {
 	c.JSON(http.StatusNoContent, gin.H{"message": "刪除留言成功"})
 }
 
+// @Summary 上傳照片/影片
+// @Produce json
+// @Param Sender formData string true "傳送人"
+// @Param Image formData file true "上傳檔案"
+// @Param Machine_Id formData string true "機器編號"
+// @Param Location formData string true "位置"
+// @Success 201 {object} string "成功"
+// @Failure 400 {object} string "上傳檔案錯誤"
+// @Router /api/file [post]
 func CreateFile(c *gin.Context) {
 	var uploadimage model.UploadImage
 
@@ -96,6 +136,11 @@ func CreateFile(c *gin.Context) {
 	c.JSON(http.StatusCreated, gin.H{"uploadimage": uploadimage})
 }
 
+// @Summary 查詢全部照片跟影片
+// @Produce json
+// @Success 200 {object} string "成功"
+// @Failure 400 {object} string "查询错误"
+// @Router /api/file [get]
 func GetAllFile(c *gin.Context) {
 	uploadimage, err := repository.GetAllFile()
 
@@ -116,6 +161,16 @@ func GetFile(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"uploadimage": uploadimage})
 }
 
+// @Summary 修改 {id} 上傳檔案
+// @Produce json
+// @Param id path int true "上傳檔案ID"
+// @Param Sender formData string true "傳送人"
+// @Param Image formData file true "上傳檔案"
+// @Param Machine_Id formData string true "機器編號"
+// @Param Location formData string true "位置"
+// @Success 200 {object} string "成功"
+// @Failure 400 {object} string "修改上傳檔案錯誤"
+// @Router /api/file/{id} [put]
 func UpdateFile(c *gin.Context) {
 	var uploadimage model.UploadImage
 
@@ -148,6 +203,10 @@ func UpdateFile(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"uploadimage": uploadimage})
 }
 
+// @Summary 刪除 {id} 上傳檔案
+// @Produce json
+// @Param id path int true "上傳檔案ID"
+// @Success 204 {object} string "成功"
 func DeleteFile(c *gin.Context) {
 	var uploadimage model.UploadImage
 
